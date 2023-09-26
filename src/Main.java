@@ -3,18 +3,25 @@ public class Main {
         System.out.println("Задание 1");
         checkingLeapYear(2024);
         System.out.println("Задание 2");
-        displayVersionNotification(1,2023);
+        displayVersionNotification(1, 2023);
         System.out.println("Задание 3");
-        definePeriodDeliveryDays(21);
-    }
-    public static void checkingLeapYear(int year) {
-        if (year % 100 != 0 && year % 4 == 0 || year % 400 == 0 && year > 1584) {
-            System.out.println("Год "+ year + " является високосным!");
+        int days = definePeriodDeliveryDays(21);
+        if (days > 0) {
+            System.out.println("Доставка займёт дней: " + days);
         } else {
-            System.out.println("Год " + year + " не является високосным!");
-        return;
+            System.out.println("Доставки нет!");
         }
     }
+
+    public static void checkingLeapYear(int year) {
+        if (year % 100 != 0 && year % 4 == 0 || year % 400 == 0 && year > 1584) {
+            System.out.println("Год " + year + " является високосным!");
+        } else {
+            System.out.println("Год " + year + " не является високосным!");
+            return;
+        }
+    }
+
     public static void displayVersionNotification(int os, int deviceYear) {
         if (os == 0 && deviceYear >= 2023) {
             System.out.println("Установите версию приложения для iOS по ссылке.");
@@ -26,24 +33,25 @@ public class Main {
         } else if (os == 1 && deviceYear < 2023) {
             System.out.println("Установите облегченную версию приложения для Android по ссылке.");
         }
-        if (os !=0 && os!=1){
+        if (os != 0 && os != 1) {
             System.out.println("Не корректная версия ОС!");
             return;
         }
     }
-     public static void definePeriodDeliveryDays(int deliveryDistance) {
-        if (deliveryDistance >0 && deliveryDistance <= 20) {
-            System.out.println("Потребуется дней: 1 ");
+
+    private static int definePeriodDeliveryDays(int deliveryDistance) {
+        if (deliveryDistance < 0 || deliveryDistance > 100) {
+            return -1;
         }
-        if (deliveryDistance > 20 && deliveryDistance < 61) {
-            System.out.println("Потребуется дней: 2 ");
+        int days=1;
+        if (deliveryDistance > 20) {
+            days++;
         }
-        if (deliveryDistance > 60 && deliveryDistance < 101) {
-            System.out.println("Потребуется дней: 3");
+        if (deliveryDistance > 60) {
+            days++;
+         }
+         return days;}
         }
-        if (deliveryDistance > 100) {
-            System.out.println("Свыше 100 км доставки нет.");
-        }
-        return;
-    }
-}
+
+
+
